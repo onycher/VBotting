@@ -1,6 +1,8 @@
 from sourceserver.sourceserver import SourceServer
 import requests
 import time
+import os
+
 
 def log_player(text, name):
     data = {
@@ -21,9 +23,10 @@ def log_player(text, name):
     else:
         print("Payload delivered successfully, code {}.".format(result.status_code))
 
-url = "https://discordapp.com/api/webhooks/983327609121292288/MZdh9yQxuSyXgdpgT38VufMhnkZL4YumXQiQmODWyJTkKwcxDt6-N_4pzRTTCDvvVpCq"
+url = os.getenv("DISCORD_WEBHOOK")
+server_ip = os.getenv("SERVER_IP")
 
-server = SourceServer("185.239.211.117:30515")
+server = SourceServer(server_ip)
 _, old_players = server.getPlayers()
 old_players = {p[1] for p in old_players if p[1]}
 
