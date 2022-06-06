@@ -27,8 +27,8 @@ def log_player(connected, name, count, players_info):
     except requests.exceptions.HTTPError as err:
         print(err)
 
-url = "https://discordapp.com/api/webhooks/983371162316836935/M3EGwM-n8Atr0z3VgCZ2eYvx1xGVwdVyiIMVtjNQLch23wHJJ_Nt5LWFXxklBw-nVAwg" #os.getenv("DISCORD_WEBHOOK")
-server_ip = "185.239.211.117:30515" #os.getenv("SERVER_IP")
+url = os.getenv("DISCORD_WEBHOOK")
+server_ip = os.getenv("SERVER_IP")
 
 server = SourceServer(server_ip)
 _, old_players = server.getPlayers()
