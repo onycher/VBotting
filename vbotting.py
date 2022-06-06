@@ -5,13 +5,15 @@ import os
 
 
 def log_player(connected, name, count, players_info):
-    content = "```Players: __{}/40__\n\nPlayer list:".format(count)
+    content = "> Players: {}/40\n> \n> Player list:\n".format(len([p for p in players_info if p[1] != ""]))
     for idx, player in enumerate(players_info):
-        content += "{}. {} ({} GL)\n".format(idx, player[1], player[2])
+        if player[1] == "":
+            continue
+        content += "> {}. **{}** ({} GL)\n".format(idx+1, player[1], player[2])
     if connected:
-        content += "```\n> **{}** just connected to the server".format(name)
+        content += "> \n``` {} just connected to the server```".format(name)
     else:
-        content += "```\n> **{}** just left the server".format(name)
+        content += "> \n``` {} just left the server```".format(name)
 
     
     data = {
