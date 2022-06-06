@@ -29,7 +29,11 @@ _, old_players = server.getPlayers()
 old_players = {p[1] for p in old_players if p[1]}
 
 while True:
-    _, players = server.getPlayers()
+    try:
+        _, players = server.getPlayers()
+    except:
+        time.sleep(10)
+        continue
     players = {p[1] for p in players if p[1]}
     for p in players-old_players:
         log_player("Player connected", p)
