@@ -49,7 +49,8 @@ while True:
     for p in old_players-players:
         c.append(True)
         n.append(p)
-    log_player(c, n, count, players_info)
+    if c:
+        log_player(c, n, count, players_info)
     old_players = players
 
     time.sleep(10)
