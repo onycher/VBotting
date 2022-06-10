@@ -11,9 +11,9 @@ def log_player(connecteds, names, count, players_info):
         content += "> {}. **{}** ({} GL)\n".format(idx+1, player[1], player[2])
     for connected, name in zip(connecteds, names):
         if connected:
-            content += "> \n``` {} just connected to the server```".format(name)
+            content += "\n``` {} just connected to the server```".format(name)
         else:
-            content += "> \n``` {} just left the server```".format(name)
+            content += "\n``` {} just left the server```".format(name)
 
     
     data = {
@@ -47,7 +47,7 @@ while True:
         c.append(True)
         n.append(p)
     for p in old_players-players:
-        c.append(True)
+        c.append(False)
         n.append(p)
     if c:
         log_player(c, n, count, players_info)
