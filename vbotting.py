@@ -4,16 +4,16 @@ import time
 import os
 
 
-def log_player(connected, name, count, players_info):
+def log_player(connecteds, names, count, players_info):
+    players_info = [p for p in players_info if p[1] != ""]
     content = "> Players: {}/40\n> \n> Player list:\n".format(len([p for p in players_info if p[1] != ""]))
-    for idx, player in enumerate(players_info):
-        if player[1] == "":
-            continue
+    for idx, player in enumerate(sorted(players_info, lambda p: p[2], reverse=True)):
         content += "> {}. **{}** ({} GL)\n".format(idx+1, player[1], player[2])
-    if connected:
-        content += "> \n``` {} just connected to the server```".format(name)
-    else:
-        content += "> \n``` {} just left the server```".format(name)
+    for connected, name in zip(connecteds, names):
+        if connected:
+            content += "> \n``` {} just connected to the server```".format(name)
+        else:
+            content += "> \n``` {} just left the server```".format(name)
 
     
     data = {
@@ -41,11 +41,15 @@ while True:
         time.sleep(10)
         continue
     players = {p[1] for p in players_info if p[1]}
+    c = []
+    n = []
     for p in players-old_players:
-        log_player(True, p, count, players_info)
+        c.append(True)
+        n.append(p)
     for p in old_players-players:
-        log_player(False, p, count, players_info)
-    
+        c.append(True)
+        n.append(p)
+    log_player(c, n, count, players_info)
     old_players = players
 
     time.sleep(10)
