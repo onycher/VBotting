@@ -7,7 +7,7 @@ import os
 def log_player(connecteds, names, count, players_info):
     players_info = [p for p in players_info if p[1] != ""]
     content = "> Players: {}/40\n> \n> Player list:\n".format(len([p for p in players_info if p[1] != ""]))
-    for idx, player in enumerate(sorted(players_info, lambda p: p[2], reverse=True)):
+    for idx, player in enumerate(sorted(players_info, key=lambda p: p[2], reverse=True)):
         content += "> {}. **{}** ({} GL)\n".format(idx+1, player[1], player[2])
     for connected, name in zip(connecteds, names):
         if connected:
